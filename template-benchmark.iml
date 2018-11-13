@@ -61,7 +61,7 @@
     <orderEntry type="library" name="Maven: com.github.jknack:handlebars:4.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.antlr:antlr4-runtime:4.5.1-1" level="project" />
     <orderEntry type="library" name="Maven: org.mozilla:rhino:1.7R4" level="project" />
-    <orderEntry type="library" name="Maven: com.fizzed:rocker-runtime:0.10.3" level="project" />
+    <orderEntry type="library" name="Maven: com.fizzed:rocker-runtime:1.1.0" level="project" />
     <orderEntry type="library" name="Maven: com.github.xmlet:htmlflow:3.2" level="project" />
     <orderEntry type="library" name="Maven: com.github.xmlet:htmlApiFaster:1.0.6" level="project" />
     <orderEntry type="library" name="Maven: com.github.xmlet:xsdAsmFaster:1.0.5" level="project" />
@@ -84,6 +84,7 @@
     <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.2.61" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains:annotations:13.0" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains.kotlinx:kotlinx-html-jvm:0.6.11" level="project" />
+    <orderEntry type="library" name="Maven: javax.annotation:javax.annotation-api:1.3.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
   </component>

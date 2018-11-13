@@ -16,11 +16,12 @@ public class Trimou extends BaseBenchmark {
 
     private Map<String, Object> context;
 
-    private org.trimou.Mustache template;
+    private org.trimou.Mustache stocksTemplate;
+    private org.trimou.Mustache presentationsTemplate;
 
     @Setup
     public void setup() {
-        template = MustacheEngineBuilder.newBuilder()
+        stocksTemplate = MustacheEngineBuilder.newBuilder()
                 // Disable HTML escaping
                 .setProperty(EngineConfigurationKey.SKIP_VALUE_ESCAPING, true)
                 // Disable useless resolver
@@ -39,12 +40,26 @@ public class Trimou extends BaseBenchmark {
                         // We don't handle any other number types
                     }
                 }).build().getMustache("stocks");
+
+        presentationsTemplate = MustacheEngineBuilder.newBuilder()
+                // Disable HTML escaping
+                .setProperty(EngineConfigurationKey.SKIP_VALUE_ESCAPING, true)
+                // Disable useless resolver
+                .setProperty(CombinedIndexResolver.ENABLED_KEY, false)
+                .addTemplateLocator(ClassPathTemplateLocator.builder(1).setRootPath("templates").setScanClasspath(false).setSuffix("trimou.html").build())
+                .registerHelpers(HelpersBuilder.extra().build()).build().getMustache("presentations");
+
         this.context = getContext();
     }
 
     @Benchmark
-    public String benchmark() {
-        return template.render(context);
+    public String stocks() {
+        return stocksTemplate.render(context);
+    }
+
+    @Benchmark
+    public String presentations() {
+        return presentationsTemplate.render(context);
     }
 
 }

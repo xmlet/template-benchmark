@@ -14,7 +14,8 @@ public class Velocity extends BaseBenchmark {
 
     private VelocityContext context;
 
-    private Template template;
+    private Template stocksTemplate;
+    private Template presentationsTemplate;
 
     @Setup
     public void setup() {
@@ -25,13 +26,21 @@ public class Velocity extends BaseBenchmark {
 
         VelocityEngine engine = new VelocityEngine(configuration);
         context = new VelocityContext(getContext());
-        template = engine.getTemplate("templates/stocks.velocity.html", "UTF-8");
+        stocksTemplate = engine.getTemplate("templates/stocks.velocity.html", "UTF-8");
+        presentationsTemplate = engine.getTemplate("templates/presentations.velocity.html", "UTF-8");
     }
 
     @Benchmark
-    public String benchmark() {
+    public String stocks() {
         Writer writer = new StringWriter();
-        template.merge(context, writer);
+        stocksTemplate.merge(context, writer);
+        return writer.toString();
+    }
+
+    @Benchmark
+    public String presentations() {
+        Writer writer = new StringWriter();
+        presentationsTemplate.merge(context, writer);
         return writer.toString();
     }
 

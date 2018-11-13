@@ -14,19 +14,28 @@ public class Pebble extends BaseBenchmark {
 
     private Map<String, Object> context;
 
-    private PebbleTemplate template;
+    private PebbleTemplate stocksTemplate;
+    private PebbleTemplate presentationsTemplate;
 
     @Setup
     public void setup() throws PebbleException {
         PebbleEngine engine = new PebbleEngine.Builder().autoEscaping(false).build();
-        template = engine.getTemplate("templates/stocks.pebble.html");
+        stocksTemplate = engine.getTemplate("templates/stocks.pebble.html");
+        presentationsTemplate = engine.getTemplate("templates/presentations.pebble.html");
         this.context = getContext();
     }
 
     @Benchmark
-    public String benchmark() throws PebbleException, IOException {
+    public String stocks() throws PebbleException, IOException {
         StringWriter writer = new StringWriter();
-        template.evaluate(writer, context);
+        stocksTemplate.evaluate(writer, context);
+        return writer.toString();
+    }
+
+    @Benchmark
+    public String presentations() throws PebbleException, IOException {
+        StringWriter writer = new StringWriter();
+        presentationsTemplate.evaluate(writer, context);
         return writer.toString();
     }
 

@@ -22,7 +22,7 @@
 		<junit.version>4.12</junit.version>
 		<trimou.version>1.8.2.Final</trimou.version>
 		<hbs.version>4.0.1</hbs.version>
-		<rocker.version>0.10.3</rocker.version>
+		<rocker.version>1.1.0</rocker.version>
 
 		<kotlin.version>1.2.61</kotlin.version>
 		<kotlinx.html.version>0.6.11</kotlinx.html.version>

@@ -1,5 +1,6 @@
 package com.mitchellbosecke.benchmark;
 
+import com.mitchellbosecke.benchmark.model.Presentation;
 import com.mitchellbosecke.benchmark.model.Stock;
 import j2html.attributes.Attribute;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -28,6 +29,7 @@ public class J2Html extends BaseBenchmark {
 
     private String HEADER = "<!DOCTYPE html>";
     private List<Stock> stocks = (List<Stock>) Stock.dummyItems();
+    private List<Presentation> presentations = (List<Presentation>) Presentation.dummyItems();
 
     @Benchmark
     public String stocks() {
@@ -74,4 +76,33 @@ public class J2Html extends BaseBenchmark {
         ).renderFormatted();
     }
 
+    @Benchmark
+    public String presentations() {
+        return HEADER + html(
+                head(
+                        meta().withCharset("utf-8"),
+                        meta().withName("viewport").withContent("width=device-width, initial-scale=1.0"),
+                        meta().attr(new Attribute("http-equiv", "Content-Language")).withContent("IE=Edge"),
+                        title("JFall 2013 Presentations - htmlApi"),
+                        link().withRel("Stylesheet").withHref("/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css").attr(new Attribute("media", "screen"))
+                ),
+                body(
+                        div(
+                                div(
+                                        h1("JFall 2013 Presentations - htmlApi")
+                                ).withClass("page-header"),
+                                each(presentations, (Presentation presentation) ->
+                                        div(
+                                                div(
+                                                        h3(presentation.getTitle() + " - " + presentation.getSpeakerName()).withClass("panel-title")
+                                                ).withClass("panel-heading"),
+                                                div(presentation.getSummary()).withClass("panel-body")
+                                        ).withClass("panel panel-default")
+                                )
+                        ).withClass("container"),
+                        script().withSrc("/webjars/jquery/3.1.1/jquery.min.js"),
+                        script().withSrc("/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js")
+                )
+        ).renderFormatted();
+    }
 }

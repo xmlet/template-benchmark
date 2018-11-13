@@ -53,7 +53,7 @@ thead {
       </tr>
     </thead>
     <tbody>
-      {{#each items base=1}}
+      {{#each stockItems base=1}}
       <tr class="{{&@odd}}{{&@even}}">
         <td>{{&@index}}</td>
         <td><a href="/stocks/{{&symbol}}">{{&symbol}}</a></td>

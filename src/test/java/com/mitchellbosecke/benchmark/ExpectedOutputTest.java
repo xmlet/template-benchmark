@@ -29,63 +29,63 @@ public class ExpectedOutputTest {
     public void testFreemarkerOutput() throws IOException, TemplateException {
         Freemarker freemarker = new Freemarker();
         freemarker.setup();
-        assertOutput(freemarker.benchmark());
+        assertOutput(freemarker.stocks());
     }
     
     @Test
     public void testRockerOutput() throws IOException, TemplateException {
         Rocker rocker = new Rocker();
         rocker.setup();
-        assertOutput(rocker.benchmark());
+        assertOutput(rocker.stocks());
     }
 
     @Test
     public void testPebbleOutput() throws IOException, PebbleException {
         Pebble pebble = new Pebble();
         pebble.setup();
-        assertOutput(pebble.benchmark());
+        assertOutput(pebble.stocks());
     }
 
     @Test
     public void testVelocityOutput() throws IOException {
         Velocity velocity = new Velocity();
         velocity.setup();
-        assertOutput(velocity.benchmark());
+        assertOutput(velocity.stocks());
     }
 
     @Test
     public void testMustacheOutput() throws IOException {
         Mustache mustache = new Mustache();
         mustache.setup();
-        assertOutput(mustache.benchmark());
+        assertOutput(mustache.stocks());
     }
 
     @Test
     public void testThymeleafOutput() throws IOException, TemplateException {
         Thymeleaf thymeleaf = new Thymeleaf();
         thymeleaf.setup();
-        assertOutput(thymeleaf.benchmark());
+        assertOutput(thymeleaf.stocks());
     }
 
     @Test
     public void testTrimouOutput() throws IOException {
         Trimou trimou = new Trimou();
         trimou.setup();
-        assertOutput(trimou.benchmark());
+        assertOutput(trimou.stocks());
     }
 
     @Test
     public void testHbsOutput() throws IOException {
         Handlebars hbs = new Handlebars();
         hbs.setup();
-        assertOutput(hbs.benchmark());
+        assertOutput(hbs.stocks());
     }
 
     @Test
     public void testHtmlFlowOutput() throws IOException {
         HtmlFlow hf = new HtmlFlow();
         hf.setup();
-        assertOutput(hf.benchmark());
+        assertOutput(hf.stocks());
     }
 
     private void assertOutput(final String output) throws IOException {
