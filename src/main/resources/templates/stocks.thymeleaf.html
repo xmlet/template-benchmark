@@ -54,11 +54,9 @@
 		</thead>
 		<tbody>
 <!--/* Note that itemStat.odd works with index (starting with 0) whereas itemStat.count is starting with 1 */-->
-			<tr th:each="item: ${items}"
-				th:class="${itemStat.odd}? 'odd' : 'even'">
+			<tr th:each="item: ${stockItems}" th:class="${itemStat.odd}? 'odd' : 'even'">
 				<td th:utext="${itemStat.count}"></td>
-				<td><a th:href="${'/stocks/' + item.symbol}"
-					th:utext="${item.symbol}"></a></td>
+				<td><a th:href="${'/stocks/' + item.symbol}" th:utext="${item.symbol}"></a></td>
 				<td><a th:href="${item.url}" th:utext="${item.name}"></a></td>
 				<td><strong th:utext="${item.price}"></strong></td>
 				<td th:utext="${item.change}"

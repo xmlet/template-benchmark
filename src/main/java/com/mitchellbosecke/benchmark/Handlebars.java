@@ -16,24 +16,34 @@ public class Handlebars extends BaseBenchmark {
 
   private Object context;
 
-  private Template template;
+    private Template stocksTemplate;
+    private Template presentationsTemplate;
 
-  @Setup
-  public void setup() throws IOException {
-    template = new com.github.jknack.handlebars.Handlebars(new ClassPathTemplateLoader("/", ".html"))
-            .registerHelper("minus", new Helper<Stock>() {
-              @Override
-              public CharSequence apply(final Stock stock, final Options options)
-                  throws IOException {
-                return stock.getChange() < 0 ? new SafeString("class=\"minus\"") : null;
-              }
-            }).compile("templates/stocks.hbs");
-    this.context = getContext();
-  }
+    @Setup
+    public void setup() throws IOException {
+        stocksTemplate = new com.github.jknack.handlebars.Handlebars(new ClassPathTemplateLoader("/", ".html"))
+                .registerHelper("minus", new Helper<Stock>() {
+                    @Override
+                    public CharSequence apply(final Stock stock, final Options options)
+                            throws IOException {
+                        return stock.getChange() < 0 ? new SafeString("class=\"minus\"") : null;
+                    }
+                }).compile("templates/stocks.hbs");
 
-  @Benchmark
-  public String benchmark() throws IOException {
-    return template.apply(context);
-  }
+        presentationsTemplate = new com.github.jknack.handlebars.Handlebars(
+                new ClassPathTemplateLoader("/", ".html")).
+                compile("templates/presentations.hbs");
+        this.context = getContext();
+    }
+
+    @Benchmark
+    public String stocks() throws IOException {
+        return stocksTemplate.apply(context);
+    }
+
+    @Benchmark
+    public String presentations() throws IOException {
+        return presentationsTemplate.apply(context);
+    }
 
 }

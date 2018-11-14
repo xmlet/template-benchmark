@@ -53,7 +53,7 @@ thead {
 			</tr>
 		</thead>
 		<tbody>
-			{{#items}}
+			{{#stockItems}}
 			<tr class="{{indexParity}}">
 				<td>{{index}}</td>
 				<td><a href="/stocks/{{symbol}}">{{symbol}}</a></td>
@@ -62,7 +62,7 @@ thead {
 				<td{{minusClass change}}>{{change}}</td>
 				<td{{minusClass change}}>{{ratio}}</td>
 			</tr>
-			{{/items}}
+			{{/stockItems}}
 		</tbody>
 	</table>
 

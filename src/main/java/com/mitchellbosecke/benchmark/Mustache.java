@@ -18,7 +18,8 @@ import com.mitchellbosecke.benchmark.model.Stock;
 
 public class Mustache extends BaseBenchmark {
 
-    private com.github.mustachejava.Mustache template;
+    private com.github.mustachejava.Mustache stocksTemplate;
+    private com.github.mustachejava.Mustache presentationsTemplate;
 
     @Setup
     public void setup() {
@@ -34,18 +35,27 @@ public class Mustache extends BaseBenchmark {
                 }
             }
         };
-        template = mustacheFactory.compile("templates/stocks.mustache.html");
+        stocksTemplate = mustacheFactory.compile("templates/stocks.mustache.html");
+        presentationsTemplate = mustacheFactory.compile("templates/presentations.mustache.html");
     }
 
     @SuppressWarnings("unchecked")
     @Benchmark
-    public String benchmark() {
+    public String stocks() {
 
         Map<String, Object> data = getContext();
-        data.put("items", new StockCollection((Collection<Stock>) data.get("items")));
+        data.put("stockItems", new StockCollection((Collection<Stock>) data.get("stockItems")));
 
         Writer writer = new StringWriter();
-        template.execute(writer, data);
+        stocksTemplate.execute(writer, data);
+        return writer.toString();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Benchmark
+    public String presentations() {
+        Writer writer = new StringWriter();
+        presentationsTemplate.execute(writer, getContext());
         return writer.toString();
     }
 
@@ -53,8 +63,6 @@ public class Mustache extends BaseBenchmark {
      * This is a modified copy of
      * {@link com.github.mustachejava.util.DecoratedCollection} - we need the
      * first element at index 1.
-     *
-     * @param <T>
      */
     private class StockCollection extends AbstractCollection<StockView> {
 
@@ -119,5 +127,4 @@ public class Mustache extends BaseBenchmark {
             this.rowClass = index % 2 == 0 ? "even" : "odd";
         }
     }
-
 }

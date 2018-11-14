@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import com.mitchellbosecke.benchmark.model.Presentation;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
@@ -25,7 +26,8 @@ public class BaseBenchmark {
 
     protected Map<String, Object> getContext() {
         Map<String, Object> context = new HashMap<>();
-        context.put("items", Stock.dummyItems());
+        context.put("stockItems", Stock.dummyItems());
+        context.put("presentationItems", Presentation.dummyItems());
         return context;
     }
 

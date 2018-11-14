@@ -28,9 +28,16 @@ public class Thymeleaf extends BaseBenchmark {
     }
 
     @Benchmark
-    public String benchmark() throws TemplateException, IOException {
+    public String stocks() throws TemplateException, IOException {
         Writer writer = new StringWriter();
         engine.process("templates/stocks.thymeleaf.html", context, writer);
+        return writer.toString();
+    }
+
+    @Benchmark
+    public String presentations() throws TemplateException, IOException {
+        Writer writer = new StringWriter();
+        engine.process("templates/presentations.thymeleaf.html", context, writer);
         return writer.toString();
     }
 
