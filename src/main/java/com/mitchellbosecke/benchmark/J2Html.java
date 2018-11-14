@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UncheckedIOException;
+import java.util.Collection;
 import java.util.List;
 
 import static j2html.TagCreator.*;
@@ -29,7 +30,7 @@ public class J2Html extends BaseBenchmark {
 
     private String HEADER = "<!DOCTYPE html>";
     private List<Stock> stocks = (List<Stock>) Stock.dummyItems();
-    private List<Presentation> presentations = (List<Presentation>) Presentation.dummyItems();
+    private Collection<Presentation> presentations = Presentation.dummyItems();
 
     @Benchmark
     public String stocks() {
