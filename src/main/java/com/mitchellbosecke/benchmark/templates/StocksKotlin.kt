@@ -4,12 +4,13 @@ import com.mitchellbosecke.benchmark.model.Stock
 import kotlinx.html.*
 import kotlinx.html.dom.createHTMLDocument
 import kotlinx.html.dom.serialize
+import kotlinx.html.stream.createHTML
 
 class StocksKotlin {
     companion object {
 
         fun stocksTemplate(stocks : List<Stock> ): String {
-            return createHTMLDocument()
+            return createHTML(prettyPrint = false)
                 .html {
                     head {
                         title { text("Stock Prices") }
@@ -55,7 +56,7 @@ class StocksKotlin {
                             }
                         }
                     }
-                }.serialize(false)
+                }
         }
     }
 }

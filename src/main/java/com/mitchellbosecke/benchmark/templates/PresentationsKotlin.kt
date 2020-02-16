@@ -4,12 +4,13 @@ import com.mitchellbosecke.benchmark.model.Presentation
 import kotlinx.html.*
 import kotlinx.html.dom.createHTMLDocument
 import kotlinx.html.dom.serialize
+import kotlinx.html.stream.createHTML
 
 class PresentationsKotlin {
     companion object {
 
         fun presentationsTemplate(presentations : Collection<Presentation> ): String {
-            return createHTMLDocument()
+            return createHTML(prettyPrint = false)
                     .html {
                         head {
                             meta {charset = "utf-8" }
@@ -47,10 +48,8 @@ class PresentationsKotlin {
                             script { src = "/webjars/jquery/3.1.1/jquery.min.js" }
                             script { src = "/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js" }
                         }
-                    }.serialize(false)
+                    }
         }
     }
-
-
 }
 
