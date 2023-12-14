@@ -1,6 +1,6 @@
 # Labels
 set title 'Java Template Engine Performance Comparison'
-set ylabel 'Templates rendered per second'
+set ylabel 'Templates rendered per Ms'
 set xlabel 'Template Engine'
 set xtics nomirror rotate by -45
 
@@ -11,8 +11,8 @@ set autoscale
 set datafile separator ','
 
 # Output
-set terminal pngcairo enhanced font "Verdana,9"
-set output 'results.png'
+set terminal svg enhanced standalone
+set output 'results.svg'
 set grid
 set key off
 set boxwidth 0.8 relative
@@ -26,5 +26,5 @@ set style line 2 lc rgb '#808080' lt 1
 set border 3 back ls 2
 set tics nomirror
 
-plot 'results.csv' every ::1 using 0:5:xticlabels(stringcolumn(1)[31:36]) with boxes ls 1,\
-    'results.csv' every ::1 using 0:($5 + 1500):(sprintf("%d",$5)) with labels
+plot 'results.csv' every ::1 using 0:5:xticlabels(stringcolumn(1)[31:50]) with boxes ls 1,\
+    'results.csv' every ::1 using 0:($5):(sprintf("%d",$5)) with labels

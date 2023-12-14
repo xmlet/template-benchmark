@@ -20,8 +20,11 @@ Running the benchmark
 ======================
 
 1. Download the source code and build it (`mvn clean install`)
-2. Run the entire benchmark suite with `java -jar target/benchmarks.jar`
-3. (Optional) To run a single benchmark, such as Mustache, use `java -jar target/benchmarks.jar Mustache`
+2. (Optional) To run a benchmark for a single template, such as Mustache, use `java -jar target/benchmarks.jar Mustache`
+3. Run the benchmark for `presentations` or `stocks` workload. E.g. for : `presentations`
+```bash
+java -jar target/benchmarks.jar -i 4 -wi 4 -f 1 -r 2 -w 2 -rff results.csv -rf csv -tu ms presentations
+```
 
 Generating plot
 ===============
@@ -45,7 +48,44 @@ Interpreting the Results
 The benchmarks measure throughput, given in "ops/time". The time unit used is seconds.
 Generally, the score represents the number of templates rendered per second; the higher the score, the better.
 
-Example Results (2018)
+Example Results (2023, with HtmlFlow 4)
+===============================
+
+**Upgrade releases of HtmlFlow to 4.1 and Kotlinx.html to 0.7.5**
+
+<table>
+<tr>
+<td><img src="results-presentations-HF4.svg"></td>
+<td><img src="results-stocks-HF4.svg"></td>
+</tr>
+</table>
+
+
+Example Results (2023, with HtmlFlow 3.5)
+===============================
+
+**These tests differ from the 2019 results in the upgraded releases of JMH
+and Kotlin standard libraries from 1.2.61 to 1.8.20** (Kotlin included 
+several optimizations to enhance type safe assertions).
+
+These tests were performed on a local machine with the following specs:
+
+```
+Mac OS Version 13.4.1
+Apple MacBook M1 Pro, 8 Coresa and 16 GB RAM
+OpenJDK Runtime Environment Corretto-17.0.5.8.1 
+OpenJDK 64-Bit Server VM Corretto (build 17.0.5+8-LTS)
+```
+
+<table>
+<tr>
+<td><img src="results-presentations-HF3.svg"></td>
+<td><img src="results-stocks-HF3.svg"></td>
+</tr>
+</table>
+
+
+Example Results (2019, with HtmlFlow 3.5)
 ===============================
 
 These tests were performed on a local machine with the following specs:
@@ -59,7 +99,7 @@ Java HotSpot(TM) 64-Bit Server VM 18.3 (build 10.0.1+10, mixed mode)
 
 <table>
 <tr>
-<td><img src="results-presentations.svg"></td>
-<td><img src="results-stocks.svg"></td>
+<td><img src="results-presentations-HF3-2019.svg"></td>
+<td><img src="results-stocks-HF3-2019.svg"></td>
 </tr>
 </table>
