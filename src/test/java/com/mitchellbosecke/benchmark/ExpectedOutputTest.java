@@ -61,6 +61,13 @@ public class ExpectedOutputTest {
     }
 
     @Test
+    public void testJStachioOutput() throws IOException {
+        JStachio jstachio = new JStachio();
+        jstachio.setup();
+        assertOutput(jstachio.stocks());
+    }
+
+    @Test
     public void testThymeleafOutput() throws IOException, TemplateException {
         Thymeleaf thymeleaf = new Thymeleaf();
         thymeleaf.setup();
