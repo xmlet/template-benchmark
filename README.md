@@ -20,8 +20,11 @@ Running the benchmark
 ======================
 
 1. Download the source code and build it (`mvn clean install`)
-2. Run the entire benchmark suite with `java -jar target/benchmarks.jar`
-3. (Optional) To run a single benchmark, such as Mustache, use `java -jar target/benchmarks.jar Mustache`
+2. (Optional) To run a benchmark for a single template, such as Mustache, use `java -jar target/benchmarks.jar Mustache`
+3. Run the benchmark for `presentations` or `stocks` workload. E.g. for : `presentations`
+```bash
+java -jar target/benchmarks.jar -i 4 -wi 4 -f 1 -r 2 -w 2 -rff results.csv -rf csv -tu ms presentations
+```
 
 Generating plot
 ===============
@@ -45,7 +48,31 @@ Interpreting the Results
 The benchmarks measure throughput, given in "ops/time". The time unit used is seconds.
 Generally, the score represents the number of templates rendered per second; the higher the score, the better.
 
-Example Results (2018)
+Example Results (2023)
+===============================
+
+**These tests differ from the 2019 results in the upgraded releases of JMH
+and Kotlin standard libraries from 1.2.61 to 1.8.20** (Kotlin included 
+several optimizations to enhance type safe assertions).
+
+These tests were performed on a local machine with the following specs:
+
+```
+Mac OS Version 13.4.1
+Apple MacBook M1 Pro, 8 Coresa and 16 GB RAM
+OpenJDK Runtime Environment Corretto-17.0.5.8.1 
+OpenJDK 64-Bit Server VM Corretto (build 17.0.5+8-LTS)
+```
+
+<table>
+<tr>
+<td><img src="results-presentations-HF3.svg"></td>
+<td><img src="results-stocks-HF3.svg"></td>
+</tr>
+</table>
+
+
+Example Results (2019)
 ===============================
 
 These tests were performed on a local machine with the following specs:
