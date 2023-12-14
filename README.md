@@ -48,7 +48,20 @@ Interpreting the Results
 The benchmarks measure throughput, given in "ops/time". The time unit used is seconds.
 Generally, the score represents the number of templates rendered per second; the higher the score, the better.
 
-Example Results (2023)
+Example Results (2023, with HtmlFlow 4)
+===============================
+
+**Upgrade releases of HtmlFlow to 4.1 and Kotlinx.html to 0.7.5**
+
+<table>
+<tr>
+<td><img src="results-presentations-HF4.svg"></td>
+<td><img src="results-stocks-HF4.svg"></td>
+</tr>
+</table>
+
+
+Example Results (2023, with HtmlFlow 3.5)
 ===============================
 
 **These tests differ from the 2019 results in the upgraded releases of JMH
@@ -72,7 +85,7 @@ OpenJDK 64-Bit Server VM Corretto (build 17.0.5+8-LTS)
 </table>
 
 
-Example Results (2019)
+Example Results (2019, with HtmlFlow 3.5)
 ===============================
 
 These tests were performed on a local machine with the following specs:
@@ -86,7 +99,7 @@ Java HotSpot(TM) 64-Bit Server VM 18.3 (build 10.0.1+10, mixed mode)
 
 <table>
 <tr>
-<td><img src="results-presentations.svg"></td>
-<td><img src="results-stocks.svg"></td>
+<td><img src="results-presentations-HF3-2019.svg"></td>
+<td><img src="results-stocks-HF3-2019.svg"></td>
 </tr>
 </table>
