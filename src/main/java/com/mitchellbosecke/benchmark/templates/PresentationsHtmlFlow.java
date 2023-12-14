@@ -1,16 +1,21 @@
 package com.mitchellbosecke.benchmark.templates;
 
 import com.mitchellbosecke.benchmark.model.Presentation;
-import htmlflow.DynamicHtml;
+import htmlflow.HtmlFlow;
+import htmlflow.HtmlPage;
+import htmlflow.HtmlView;
 import org.xmlet.htmlapifaster.EnumHttpEquivType;
 import org.xmlet.htmlapifaster.EnumMediaType;
 import org.xmlet.htmlapifaster.EnumRelType;
 
+import java.util.Iterator;
+import java.util.stream.IntStream;
+
 public class PresentationsHtmlFlow {
 
-    public static DynamicHtml<Iterable<Presentation>> view = DynamicHtml.view(PresentationsHtmlFlow::presentationsView);
+    public static HtmlView view = HtmlFlow.view(PresentationsHtmlFlow::presentationsView);
 
-    private static void presentationsView(DynamicHtml<Iterable<Presentation>> view, Iterable<Presentation> presentations){
+    private static void presentationsView(HtmlPage view){
         view.html()
             .head()
                 .meta().attrCharset("utf-8").__()
@@ -24,19 +29,21 @@ public class PresentationsHtmlFlow {
                     .div().attrClass("page-header")
                         .h1().text("JFall 2013 Presentations - htmlApi").__()
                     .__() // div
-                    .of(containerDiv ->
-                        presentations.forEach(
-                            presentation ->
+                    .of(containerDiv -> IntStream.range(0, 10).forEach(
+                            ignore ->
                                 containerDiv
                                     .div().attrClass("panel panel-default")
-                                        .div().attrClass("panel-heading")
-                                            .h3().attrClass("panel-title")
-                                                .dynamic(h3 -> h3.text(presentation.getTitle() + " - " + presentation.getSpeakerName()))
-                                            .__()
-                                        .__()
-                                        .div().attrClass("panel-body")
-                                            .dynamic(div -> div.text(presentation.getSummary()))
-                                        .__()
+                                            .<Iterator<Presentation>>dynamic((div, iter) -> {
+                                                Presentation presentation = iter.next();
+                                                div.div().attrClass("panel-heading")
+                                                    .h3().attrClass("panel-title")
+                                                        .text(presentation.getTitle() + " - " + presentation.getSpeakerName())
+                                                    .__()
+                                                .__()
+                                                .div()
+                                                    .attrClass("panel-body").text(presentation.getSummary())
+                                                .__();
+                                            })
                                     .__())
                     )
                 .__()

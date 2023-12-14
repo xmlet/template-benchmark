@@ -29,6 +29,6 @@ public class HtmlFlow extends BaseBenchmark {
 
   @Benchmark
   public String presentations() throws IOException {
-    return PresentationsHtmlFlow.view.render(presentations);
+    return PresentationsHtmlFlow.view.render(presentations.iterator());
   }
 }

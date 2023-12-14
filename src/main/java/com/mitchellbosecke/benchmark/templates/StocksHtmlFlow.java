@@ -1,21 +1,24 @@
 package com.mitchellbosecke.benchmark.templates;
 
 import com.mitchellbosecke.benchmark.model.Stock;
-import htmlflow.DynamicHtml;
+import htmlflow.HtmlFlow;
+import htmlflow.HtmlPage;
+import htmlflow.HtmlView;
 import org.xmlet.htmlapifaster.EnumHttpEquivType;
 import org.xmlet.htmlapifaster.EnumMediaType;
 import org.xmlet.htmlapifaster.EnumRelType;
 import org.xmlet.htmlapifaster.EnumTypeContentType;
 import org.xmlet.htmlapifaster.EnumTypeScriptType;
+import templates.stocks;
 
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class StocksHtmlFlow {
 
-    public static DynamicHtml<List<Stock>> view = DynamicHtml.view(StocksHtmlFlow::templateStocks);
+    public static HtmlView view = HtmlFlow.view(StocksHtmlFlow::templateStocks);
 
-    private static void templateStocks(DynamicHtml<List<Stock>> view, List<Stock> stocks) {
+    private static void templateStocks(HtmlPage view) {
         view
             .html()
                 .head()
@@ -66,27 +69,35 @@ public class StocksHtmlFlow {
                         .__() // thead
                         .tbody()
                         .of(tbody -> IntStream
-                            .rangeClosed(1, stocks.size())
+                            .rangeClosed(1, 20)
                             .forEach(index -> {
-                                Stock stock = stocks.get(index-1);
                                 tbody
-                                    .tr()
-                                    .dynamic(tr -> tr.attrClass(index % 2 == 0 ? "even" : "odd"))
+                                    .tr().attrClass(index % 2 == 0 ? "even" : "odd")
+                                        .td().text(index).__()
                                         .td()
-                                            .dynamic(td -> td.text(index ))
+                                            .a().<List<Stock>>dynamic((a, stocks) -> {
+                                                Stock stock = stocks.get(index-1);
+                                                a.attrHref("/stocks/" + stock.getSymbol()).text(stock.getSymbol());
+                                            }
+                                            ).__()
                                         .__()
                                         .td()
-                                            .a().dynamic(a -> a.attrHref("/stocks/" + stock.getSymbol()).text(stock.getSymbol())).__()
+                                            .a().<List<Stock>>dynamic((a, stocks) -> {
+                                                Stock stock = stocks.get(index-1);
+                                                a.attrHref(stock.getUrl()).text(stock.getName());
+                                            })
+                                        .__()
                                         .__()
                                         .td()
-                                            .a().dynamic(a -> a.attrHref(stock.getUrl()).text(stock.getName())).__()
+                                            .strong().<List<Stock>>dynamic((strong, stocks) -> {
+                                                Stock stock = stocks.get(index-1);
+                                                strong.text(stock.getPrice());
+                                            })
+                                            .__()
                                         .__()
                                         .td()
-                                            .strong().dynamic(strong -> strong.text(stock.getPrice())).__()
-                                        .__()
-                                        .td()
-                                            .dynamic(td -> {
-                                                double change = stock.getChange();
+                                            .<List<Stock>>dynamic((td, stocks) -> {
+                                                double change = stocks.get(index-1).getChange();
                                                 if (change < 0) {
                                                     td.attrClass("minus");
                                                 }
@@ -94,8 +105,8 @@ public class StocksHtmlFlow {
                                             })
                                         .__()
                                         .td()
-                                            .dynamic(td -> {
-                                                double ratio = stock.getRatio();
+                                            .<List<Stock>>dynamic((td, stocks) -> {
+                                                double ratio = stocks.get(index-1).getRatio();
                                                 if (ratio < 0) {
                                                     td.attrClass("minus");
                                                 }
