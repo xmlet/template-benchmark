@@ -9,14 +9,12 @@ import org.xmlet.htmlapifaster.EnumMediaType;
 import org.xmlet.htmlapifaster.EnumRelType;
 import org.xmlet.htmlapifaster.EnumTypeContentType;
 import org.xmlet.htmlapifaster.EnumTypeScriptType;
-import templates.stocks;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class StocksHtmlFlow {
 
-    public static HtmlView view = HtmlFlow.view(StocksHtmlFlow::templateStocks);
+    public static HtmlView<List<Stock>> view = HtmlFlow.view(StocksHtmlFlow::templateStocks);
 
     private static void templateStocks(HtmlPage view) {
         view
@@ -68,59 +66,53 @@ public class StocksHtmlFlow {
                             .__() // tr
                         .__() // thead
                         .tbody()
-                        .of(tbody -> IntStream
-                            .rangeClosed(1, 20)
-                            .forEach(index -> {
-                                tbody
-                                    .tr().attrClass(index % 2 == 0 ? "even" : "odd")
-                                        .td().text(index).__()
-                                        .td()
-                                            .a().<List<Stock>>dynamic((a, stocks) -> {
-                                                Stock stock = stocks.get(index-1);
-                                                a.attrHref("/stocks/" + stock.getSymbol()).text(stock.getSymbol());
-                                            }
-                                            ).__()
-                                        .__()
-                                        .td()
-                                            .a().<List<Stock>>dynamic((a, stocks) -> {
-                                                Stock stock = stocks.get(index-1);
-                                                a.attrHref(stock.getUrl()).text(stock.getName());
-                                            })
-                                        .__()
-                                        .__()
-                                        .td()
-                                            .strong().<List<Stock>>dynamic((strong, stocks) -> {
-                                                Stock stock = stocks.get(index-1);
-                                                strong.text(stock.getPrice());
-                                            })
-                                            .__()
-                                        .__()
-                                        .td()
-                                            .<List<Stock>>dynamic((td, stocks) -> {
-                                                double change = stocks.get(index-1).getChange();
-                                                if (change < 0) {
-                                                    td.attrClass("minus");
-                                                }
-                                                td.text(change);
-                                            })
-                                        .__()
-                                        .td()
-                                            .<List<Stock>>dynamic((td, stocks) -> {
-                                                double ratio = stocks.get(index-1).getRatio();
-                                                if (ratio < 0) {
-                                                    td.attrClass("minus");
-                                                }
-                                                td.text(ratio);
-                                            })
-                                        .__() // td
-                                    .__(); // tr
-                            })
-                        )
+                        .<List<Stock>>dynamic((tbody, stocks) -> {
+                            for (int i = 0; i < stocks.size(); i++) {
+                                StockDto dto = new StockDto(stocks.get(i), i + 1);
+                                tbody.text(stockPartial.render(dto));
+                            }
+                        })
                         .__() // tbody
                     .__() // table
                 .__() // body
             .__(); // html
     }
+
+    record StockDto(Stock stock, int index) {
+    }
+
+    private static HtmlView<StockDto> stockPartial = HtmlFlow.view(page -> page
+        .tr().<StockDto>dynamic((tr, dto) -> tr.attrClass(dto.index % 2 == 0 ? "even" : "odd"))
+            .td()
+                .<StockDto>dynamic((td, dto) -> td.text(dto.index))
+            .__() // td
+            .td()
+                .a()
+                    .<StockDto>dynamic((a, dto) -> a.attrHref("/stocks/" + dto.stock.getSymbol()).text(dto.stock.getSymbol()))
+                .__() // a
+            .__() // td
+            .td()
+                .a().<StockDto>dynamic((a, dto) -> a.attrHref(dto.stock.getUrl()).text(dto.stock.getName())).__()
+            .__() // td
+            .td()
+                .strong().<StockDto>dynamic((strong, dto) -> strong.text(dto.stock.getPrice())).__()
+            .__() // td
+            .td()
+                .<StockDto>dynamic((td, dto) ->{
+                    double change = dto.stock.getChange();
+                    if (change < 0) { td.attrClass("minus"); }
+                    td.text(change);
+                })
+            .__() // td
+            .td()
+                .<StockDto>dynamic((td, dto) -> {
+                    double ratio = dto.stock.getRatio();
+                    if (ratio < 0) { td.attrClass("minus"); }
+                    td.text(ratio);
+                })
+            .__() // td
+        .__() // tr
+    );
 
     private static final String STOCKS_CSS = "/*<![CDATA[*/\n" +
         "body {\n" +
