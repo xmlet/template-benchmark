@@ -17,9 +17,6 @@ import io.jstach.jstachio.escapers.PlainText;
 
 public class JStachio extends BaseBenchmark {
 
-    // Let us cheat like rocker and jte
-    private static final ThreadLocal<StringBuilder> buffer = ThreadLocal.withInitial(() -> new StringBuilder(1024 * 8));
-    
     private List<Stock> items;
     private Iterable<Presentation> presentations;
     private StocksModel stocksModel;
@@ -39,16 +36,12 @@ public class JStachio extends BaseBenchmark {
 
     @Benchmark
     public String stocks() {
-        StringBuilder sb = buffer.get();
-        sb.setLength(0);
-        return stocksTemplate.execute(stocksModel, sb).toString();
+        return stocksTemplate.execute(stocksModel);
     }
     
     @Benchmark
     public String presentations() {
-        StringBuilder sb = buffer.get();
-        sb.setLength(0);
-        return presentationsTemplate.execute(presentationsModel, sb).toString();
+        return presentationsTemplate.execute(presentationsModel);
     }
 
     @JStache(path = "templates/stocks.jstachio.html", 
