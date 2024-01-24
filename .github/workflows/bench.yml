@@ -1,4 +1,4 @@
-name: Bench Presentations
+name: Benchmark Stocks and Presentations
 
 # Controls when the action will run. 
 # Workflow runs when manually triggered using the UI or API.
@@ -8,7 +8,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   benchmark:
-    name: Benchmark Stocks and Presentations
+
     strategy:
       matrix:
         workload: [ 'presentations', 'stocks' ]
@@ -21,7 +21,7 @@ jobs:
           ref: dev
 
       - name: Setup java
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
           java-version: 17
 
@@ -32,7 +32,7 @@ jobs:
         run: java -jar target/benchmarks.jar -i 4 -wi 4 -f 1 -r 2 -w 2 -rff results.csv -rf csv -tu ms ${{ matrix.workload }}
 
       - name: Upload results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: bench-results-${{ matrix.os }}-${{ matrix.workload }}
           path: ./results.csv
