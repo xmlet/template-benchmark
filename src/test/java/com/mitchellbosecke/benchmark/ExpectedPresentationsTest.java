@@ -44,6 +44,13 @@ public class ExpectedPresentationsTest {
         mustache.setup();
         assertOutput(mustache.presentations());
     }
+    
+    @Test
+    public void testJStachioOutput() throws IOException {
+        JStachio jstachio = new JStachio();
+        jstachio.setup();
+        assertOutput(jstachio.presentations());
+    }
 
     @Test
     public void testThymeleafOutput() throws IOException, TemplateException {
