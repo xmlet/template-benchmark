@@ -9,11 +9,10 @@ import org.xmlet.htmlapifaster.EnumMediaType;
 import org.xmlet.htmlapifaster.EnumRelType;
 
 import java.util.Iterator;
-import java.util.stream.IntStream;
 
 public class PresentationsHtmlFlow {
 
-    public static HtmlView view = HtmlFlow.view(PresentationsHtmlFlow::presentationsView);
+    public static HtmlView<Iterator<Presentation>> view = HtmlFlow.view(PresentationsHtmlFlow::presentationsView);
 
     private static void presentationsView(HtmlPage view){
         view.html()
@@ -29,27 +28,31 @@ public class PresentationsHtmlFlow {
                     .div().attrClass("page-header")
                         .h1().text("JFall 2013 Presentations - htmlApi").__()
                     .__() // div
-                    .of(containerDiv -> IntStream.range(0, 10).forEach(
-                            ignore ->
-                                containerDiv
-                                    .div().attrClass("panel panel-default")
-                                            .<Iterator<Presentation>>dynamic((div, iter) -> {
-                                                Presentation presentation = iter.next();
-                                                div.div().attrClass("panel-heading")
-                                                    .h3().attrClass("panel-title")
-                                                        .text(presentation.getTitle() + " - " + presentation.getSpeakerName())
-                                                    .__()
-                                                .__()
-                                                .div()
-                                                    .attrClass("panel-body").text(presentation.getSummary())
-                                                .__();
-                                            })
-                                    .__())
-                    )
+                    .<Iterator<Presentation>>dynamic((div, iter) -> {
+                        while(iter.hasNext()) {
+                            div.text(presentationPartial.render(iter.next()));
+                        }
+                    })
                 .__()
                 .script().attrSrc("/webjars/jquery/3.1.1/jquery.min.js").__()
                 .script().attrSrc("/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js").__()
             .__()
         .__();
     }
+
+    private static HtmlView<Presentation> presentationPartial = HtmlFlow.view(page -> page
+        .div().attrClass("panel panel-default")
+            .div().attrClass("panel-heading")
+                .h3().attrClass("panel-title")
+                .<Presentation>dynamic((h3, presentation) ->
+                    h3.text(presentation.getTitle() + " - " + presentation.getSpeakerName()))
+                .__() // h3
+            .__() // div
+            .div()
+                .attrClass("panel-body")
+                .<Presentation>dynamic((div, presentation) ->
+                    div.text(presentation.getSummary()))
+            .__() // div
+        .__() // div
+    );
 }

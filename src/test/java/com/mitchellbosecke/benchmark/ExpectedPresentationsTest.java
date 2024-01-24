@@ -1,7 +1,7 @@
 package com.mitchellbosecke.benchmark;
 
-import com.mitchellbosecke.pebble.error.PebbleException;
 import freemarker.template.TemplateException;
+import io.pebbletemplates.pebble.error.PebbleException;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -43,6 +43,13 @@ public class ExpectedPresentationsTest {
         Mustache mustache = new Mustache();
         mustache.setup();
         assertOutput(mustache.presentations());
+    }
+    
+    @Test
+    public void testJStachioOutput() throws IOException {
+        JStachio jstachio = new JStachio();
+        jstachio.setup();
+        assertOutput(jstachio.presentations());
     }
 
     @Test

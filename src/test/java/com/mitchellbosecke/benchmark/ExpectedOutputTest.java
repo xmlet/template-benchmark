@@ -7,10 +7,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Locale;
 
+import io.pebbletemplates.pebble.error.PebbleException;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.mitchellbosecke.pebble.error.PebbleException;
 
 import freemarker.template.TemplateException;
 
@@ -58,6 +57,13 @@ public class ExpectedOutputTest {
         Mustache mustache = new Mustache();
         mustache.setup();
         assertOutput(mustache.stocks());
+    }
+
+    @Test
+    public void testJStachioOutput() throws IOException {
+        JStachio jstachio = new JStachio();
+        jstachio.setup();
+        assertOutput(jstachio.stocks());
     }
 
     @Test
