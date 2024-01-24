@@ -1,7 +1,7 @@
 package com.mitchellbosecke.benchmark;
 
-import com.mitchellbosecke.pebble.error.PebbleException;
 import freemarker.template.TemplateException;
+import io.pebbletemplates.pebble.error.PebbleException;
 import org.junit.Test;
 
 import java.io.BufferedReader;
