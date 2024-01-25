@@ -55,8 +55,8 @@ Example Results (2023, with HtmlFlow 4)
 
 <table>
 <tr>
-<td><img src="results-presentations-HF4.svg"></td>
-<td><img src="results-stocks-HF4.svg"></td>
+<td><img src="results/results-presentations.svg"></td>
+<td><img src="results/results-stocks.svg"></td>
 </tr>
 </table>
 
@@ -79,8 +79,8 @@ OpenJDK 64-Bit Server VM Corretto (build 17.0.5+8-LTS)
 
 <table>
 <tr>
-<td><img src="results-presentations-HF3.svg"></td>
-<td><img src="results-stocks-HF3.svg"></td>
+<td><img src="results/results-presentations-HF3-2023.svg"></td>
+<td><img src="results/results-stocks-HF3-2023.svg"></td>
 </tr>
 </table>
 
@@ -99,7 +99,7 @@ Java HotSpot(TM) 64-Bit Server VM 18.3 (build 10.0.1+10, mixed mode)
 
 <table>
 <tr>
-<td><img src="results-presentations-HF3-2019.svg"></td>
-<td><img src="results-stocks-HF3-2019.svg"></td>
+<td><img src="results/results-presentations-HF3-2019.svg"></td>
+<td><img src="results/results-stocks-HF3-2019.svg"></td>
 </tr>
 </table>
