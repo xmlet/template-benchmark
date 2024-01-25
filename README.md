@@ -48,13 +48,13 @@ Interpreting the Results
 The benchmarks measure throughput, given in "ops/time". The time unit used is seconds.
 Generally, the score represents the number of templates rendered per second; the higher the score, the better.
 
-Example Results (2023, with HtmlFlow 4 and JStachio)
+Example Results (2024, with HtmlFlow 4 and JStachio)
 ===============================
 
 **Upgraded all releases of templates including HtmlFlow to 4.3 and add new template engine JStachio**
 
 These tests were performed in Github Actions
-with Ubuntu 22.04, 4 CPU amd 16 GB RAM according to [GitHub-hosted runners for Public repositories](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories).
+with `Ubuntu 22.04, 4 CPU and 16 GB RAM` according to [GitHub-hosted runners for Public repositories](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories).
 
 
 Plots are generated from the data collected in this [run](https://github.com/xmlet/template-benchmark/actions/runs/7644609042) 
