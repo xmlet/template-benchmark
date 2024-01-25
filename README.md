@@ -14,7 +14,7 @@ JMH benchmark for popular Java template engines:
 * [j2Html](https://j2html.com/)
 * [KotlinX Html](https://github.com/Kotlin/kotlinx.html)
 * [HtmlFlow](https://github.com/xmlet/HtmlFlow)
-
+* [JStachio](https://github.com/jstachio/jstachio)
 
 Running the benchmark
 ======================
@@ -48,15 +48,21 @@ Interpreting the Results
 The benchmarks measure throughput, given in "ops/time". The time unit used is seconds.
 Generally, the score represents the number of templates rendered per second; the higher the score, the better.
 
-Example Results (2023, with HtmlFlow 4)
+Example Results (2024, with HtmlFlow 4 and JStachio)
 ===============================
 
-**Upgrade releases of HtmlFlow to 4.1 and Kotlinx.html to 0.7.5**
+**Upgraded all releases of templates including HtmlFlow to 4.3 and add new template engine JStachio**
+
+These tests were performed in Github Actions
+with `Ubuntu 22.04, 4 CPU and 16 GB RAM` according to [GitHub-hosted runners for Public repositories](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories).
+
+
+Plots are generated from the data collected in this [run](https://github.com/xmlet/template-benchmark/actions/runs/7644609042) 
 
 <table>
 <tr>
-<td><img src="results-presentations-HF4.svg"></td>
-<td><img src="results-stocks-HF4.svg"></td>
+<td><img src="results/results-presentations.svg"></td>
+<td><img src="results/results-stocks.svg"></td>
 </tr>
 </table>
 
@@ -72,15 +78,15 @@ These tests were performed on a local machine with the following specs:
 
 ```
 Mac OS Version 13.4.1
-Apple MacBook M1 Pro, 8 Coresa and 16 GB RAM
+Apple MacBook M1 Pro, 8 Cores and 16 GB RAM
 OpenJDK Runtime Environment Corretto-17.0.5.8.1 
 OpenJDK 64-Bit Server VM Corretto (build 17.0.5+8-LTS)
 ```
 
 <table>
 <tr>
-<td><img src="results-presentations-HF3.svg"></td>
-<td><img src="results-stocks-HF3.svg"></td>
+<td><img src="results/results-presentations-HF3-2023.svg"></td>
+<td><img src="results/results-stocks-HF3-2023.svg"></td>
 </tr>
 </table>
 
@@ -99,7 +105,7 @@ Java HotSpot(TM) 64-Bit Server VM 18.3 (build 10.0.1+10, mixed mode)
 
 <table>
 <tr>
-<td><img src="results-presentations-HF3-2019.svg"></td>
-<td><img src="results-stocks-HF3-2019.svg"></td>
+<td><img src="results/results-presentations-HF3-2019.svg"></td>
+<td><img src="results/results-stocks-HF3-2019.svg"></td>
 </tr>
 </table>
