@@ -20,7 +20,7 @@ public class StocksHtmlFlow {
         view
             .html()
                 .head()
-                    .title().text("Stock Prices").__()
+                    .title().raw("Stock Prices").__()
                     .meta()
                         .attrHttpEquiv(EnumHttpEquivType.CONTENT_TYPE)
                         .attrContent("text/html; charset=UTF-8")
@@ -49,27 +49,27 @@ public class StocksHtmlFlow {
                     .__()
                     .style()
                         .attrType(EnumTypeContentType.TEXT_CSS)
-                        .text(STOCKS_CSS)
+                        .raw(STOCKS_CSS)
                     .__()
                 .__() // head
                 .body()
-                    .h1().text("Stock Prices").__()
+                    .h1().raw("Stock Prices").__()
                     .table()
                         .thead()
                             .tr()
-                                .th().text("#").__()
-                                .th().text("symbol").__()
-                                .th().text("name").__()
-                                .th().text("price").__()
-                                .th().text("change").__()
-                                .th().text("ratio").__()
+                                .th().raw("#").__()
+                                .th().raw("symbol").__()
+                                .th().raw("name").__()
+                                .th().raw("price").__()
+                                .th().raw("change").__()
+                                .th().raw("ratio").__()
                             .__() // tr
                         .__() // thead
                         .tbody()
                         .<List<Stock>>dynamic((tbody, stocks) -> {
                             for (int i = 0; i < stocks.size(); i++) {
                                 StockDto dto = new StockDto(stocks.get(i), i + 1);
-                                tbody.text(stockPartial.render(dto));
+                                tbody.raw(stockPartial.render(dto));
                             }
                         })
                         .__() // tbody
@@ -84,31 +84,31 @@ public class StocksHtmlFlow {
     private static HtmlView<StockDto> stockPartial = HtmlFlow.view(page -> page
         .tr().<StockDto>dynamic((tr, dto) -> tr.attrClass(dto.index % 2 == 0 ? "even" : "odd"))
             .td()
-                .<StockDto>dynamic((td, dto) -> td.text(dto.index))
+                .<StockDto>dynamic((td, dto) -> td.raw(dto.index))
             .__() // td
             .td()
                 .a()
-                    .<StockDto>dynamic((a, dto) -> a.attrHref("/stocks/" + dto.stock.getSymbol()).text(dto.stock.getSymbol()))
+                    .<StockDto>dynamic((a, dto) -> a.attrHref("/stocks/" + dto.stock.getSymbol()).raw(dto.stock.getSymbol()))
                 .__() // a
             .__() // td
             .td()
-                .a().<StockDto>dynamic((a, dto) -> a.attrHref(dto.stock.getUrl()).text(dto.stock.getName())).__()
+                .a().<StockDto>dynamic((a, dto) -> a.attrHref(dto.stock.getUrl()).raw(dto.stock.getName())).__()
             .__() // td
             .td()
-                .strong().<StockDto>dynamic((strong, dto) -> strong.text(dto.stock.getPrice())).__()
+                .strong().<StockDto>dynamic((strong, dto) -> strong.raw(dto.stock.getPrice())).__()
             .__() // td
             .td()
                 .<StockDto>dynamic((td, dto) ->{
                     double change = dto.stock.getChange();
                     if (change < 0) { td.attrClass("minus"); }
-                    td.text(change);
+                    td.raw(change);
                 })
             .__() // td
             .td()
                 .<StockDto>dynamic((td, dto) -> {
                     double ratio = dto.stock.getRatio();
                     if (ratio < 0) { td.attrClass("minus"); }
-                    td.text(ratio);
+                    td.raw(ratio);
                 })
             .__() // td
         .__() // tr
