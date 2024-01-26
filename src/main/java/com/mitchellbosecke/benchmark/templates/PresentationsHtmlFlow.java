@@ -20,17 +20,17 @@ public class PresentationsHtmlFlow {
                 .meta().attrCharset("utf-8").__()
                 .meta().attrName("viewport").attrContent("width=device-width, initial-scale=1.0").__()
                 .meta().attrHttpEquiv(EnumHttpEquivType.CONTENT_LANGUAGE).attrContent("IE=Edge").__()
-                .title().text("JFall 2013 Presentations - htmlApi").__()
+                .title().raw("JFall 2013 Presentations - htmlApi").__()
                 .link().attrRel(EnumRelType.STYLESHEET).attrHref("/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css").attrMedia(EnumMediaType.SCREEN).__()
             .__()
             .body()
                 .div().attrClass("container")
                     .div().attrClass("page-header")
-                        .h1().text("JFall 2013 Presentations - htmlApi").__()
+                        .h1().raw("JFall 2013 Presentations - htmlApi").__()
                     .__() // div
                     .<Iterator<Presentation>>dynamic((div, iter) -> {
                         while(iter.hasNext()) {
-                            div.text(presentationPartial.render(iter.next()));
+                            div.raw(presentationPartial.render(iter.next()));
                         }
                     })
                 .__()
@@ -45,13 +45,13 @@ public class PresentationsHtmlFlow {
             .div().attrClass("panel-heading")
                 .h3().attrClass("panel-title")
                 .<Presentation>dynamic((h3, presentation) ->
-                    h3.text(presentation.getTitle() + " - " + presentation.getSpeakerName()))
+                    h3.raw(presentation.getTitle() + " - " + presentation.getSpeakerName()))
                 .__() // h3
             .__() // div
             .div()
                 .attrClass("panel-body")
                 .<Presentation>dynamic((div, presentation) ->
-                    div.text(presentation.getSummary()))
+                    div.raw(presentation.getSummary()))
             .__() // div
         .__() // div
     );
