@@ -57,7 +57,7 @@ These tests were performed in Github Actions
 with `Ubuntu 22.04, 4 CPU and 16 GB RAM` according to [GitHub-hosted runners for Public repositories](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories).
 
 
-Plots are generated from the data collected in this [run](https://github.com/xmlet/template-benchmark/actions/runs/7644609042) 
+Plots are generated from the data collected in this [run](https://github.com/xmlet/template-benchmark/actions/runs/7670044064) 
 
 <table>
 <tr>
