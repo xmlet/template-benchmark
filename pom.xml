@@ -31,7 +31,7 @@
 
 		<kotlin.version>2.0.0</kotlin.version>
 		<kotlinx.html.version>0.8.0</kotlinx.html.version>
-		<kotlin.html.builder.version>0.2.0-SNAPSHOT</kotlin.html.builder.version>
+		<kotlin.html.builder.version>0.2.0</kotlin.html.builder.version>
 	</properties>
 
 	<licenses>
