@@ -17,10 +17,9 @@ class StocksKotlinHtmlBuilder {
                         link("rel" to "shortcut icon", "href" to "/images/favicon.ico")
                         link("rel" to "stylesheet", "type" to "text/css", "href" to "/css/style.css", "media" to "all")
                         script("type" to "text/javascript", "src" to "/js/util.js")
-                        style(
-                            "type" to "text/css",
-                            text = "[body {  color: #333333;  line-height: 150%;}thead {  font-weight: bold;  background-color: #CCCCCC;}.odd {  background-color: #FFCCCC;}.even {  background-color: #CCCCFF;}.minus {  color: #FF0000;}]]>"
-                        )
+                        style("type" to "text/css") {
+                            unsafe("[body {  color: #333333;  line-height: 150%;}thead {  font-weight: bold;  background-color: #CCCCCC;}.odd {  background-color: #FFCCCC;}.even {  background-color: #CCCCFF;}.minus {  color: #FF0000;}]]>")
+                        }
                     }
                     body {
                         h1 { text("Stock Prices") }
