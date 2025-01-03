@@ -19,7 +19,7 @@ JMH benchmark for popular Java template engines:
 Running the benchmark
 ======================
 
-1. Download the source code and build it (`mvn clean install`)
+1. Download the source code and build it (`mvn clean package`)
 2. (Optional) To run a benchmark for a single template, such as Mustache, use `java -jar target/benchmarks.jar Mustache`
 3. Run the benchmark for `presentations` or `stocks` workload. E.g. for : `presentations`
 ```bash
