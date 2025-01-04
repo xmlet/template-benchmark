@@ -8,3 +8,4 @@ target/
 .project
 /.idea/*
 .vscode
+results.csv
