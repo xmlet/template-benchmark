@@ -212,7 +212,7 @@
 		<dependency>
             <groupId>com.github.xmlet</groupId>
             <artifactId>htmlflow</artifactId>
-            <version>4.4</version>
+            <version>5.0.1</version>
         </dependency>
 
 		<dependency>
