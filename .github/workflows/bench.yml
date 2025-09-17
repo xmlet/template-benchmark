@@ -33,7 +33,7 @@ jobs:
         run: java -jar target/benchmarks.jar -i 4 -wi 4 -f 1 -r 2 -w 2 -rff results.csv -rf csv -tu ms ${{ matrix.workload }}
 
       - name: Upload results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bench-results-${{ matrix.os }}-${{ matrix.workload }}
           path: ./results.csv
