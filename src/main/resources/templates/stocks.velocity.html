@@ -39,45 +39,45 @@
 
 <body>
 
-	<h1>Stock Prices</h1>
+<h1>Stock Prices</h1>
 
-	<table>
-		<thead>
-	    	<tr>
-     			<th>#</th>
-     			<th>symbol</th>
-     			<th>name</th>
-     			<th>price</th>
-     			<th>change</th>
-     			<th>ratio</th>
-    		</tr>
-		</thead>
-		<tbody>
-		#foreach($item in $stockItems)
-			#if($velocityCount % 2 == 0) #set($klass = "even") #else #set($klass = "odd") #end
-			<tr class="${klass}">
-				<td>${velocityCount}</td>
-			    <td>
-			    	<a href="/stocks/${item.symbol}">${item.symbol}</a>
-			    </td>
-			    <td>
-			    	<a href="${item.url}">${item.name}</a>
-			    </td>
-			    <td>
-			    	<strong>${item.price}</strong>
-			    </td>
+<table>
+	<thead>
+	<tr>
+		<th>#</th>
+		<th>symbol</th>
+		<th>name</th>
+		<th>price</th>
+		<th>change</th>
+		<th>ratio</th>
+	</tr>
+	</thead>
+	<tbody>
+	#foreach($item in $stockItems)
+	#if($foreach.count % 2 == 0) #set($klass = "even") #else #set($klass = "odd") #end
+	<tr class="${klass}">
+		<td>${foreach.count}</td>
+		<td>
+			<a href="/stocks/${item.getSymbol()}">${item.getSymbol()}</a>
+		</td>
+		<td>
+			<a href="${item.getUrl()}">${item.getName()}</a>
+		</td>
+		<td>
+			<strong>${item.getPrice()}</strong>
+		</td>
 
-			    #if($item.change < 0.0)
-			    	<td class="minus">${item.change}</td>
-			    	<td class="minus">${item.ratio}</td>
-			    #else
-			    	<td>${item.change}</td>
-			    	<td>${item.ratio}</td>
-			    #end
-			</tr>
+		#if($item.getChange() && $item.getChange() < 0.0)
+		<td class="minus">${item.getChange()}</td>
+		<td class="minus">${item.getRatio()}</td>
+		#else
+		<td>${item.getChange()}</td>
+		<td>${item.getRatio()}</td>
 		#end
-   		</tbody>
-	</table>
+	</tr>
+	#end
+	</tbody>
+</table>
 
 </body>
 </html>
