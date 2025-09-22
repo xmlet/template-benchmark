@@ -23,15 +23,15 @@ Running the benchmark
 2. (Optional) To run a benchmark for a single template, such as Mustache, use `java -jar target/benchmarks.jar Mustache`
 3. Run the benchmark for `presentations` or `stocks` workload. E.g. for : `presentations`
 ```bash
-java -jar target/benchmarks.jar -i 4 -wi 4 -f 1 -r 2 -w 2 -rff results.csv -rf csv -tu ms presentations
+java -jar target/benchmarks.jar -i 4 -wi 4 -f 1 -r 2 -w 2 -rff results/results-presentations.csv -rf csv -tu ms presentations
 ```
 
 Generating plot
 ===============
-1. Run `Stocks` benchmark while exporting results to csv with `java -jar target/benchmarks.jar -rff results.csv -rf csv stocks`
-2. Use gnuplot to generate plot with `gnuplot benchmark.plot`. This will output `results.png`.
-3. Run `Presentations` benchmark while exporting results to csv with `java -jar target/benchmarks.jar -rff results.csv -rf csv presentations`
-4. Use gnuplot to generate plot with `gnuplot benchmark.plot`. This will output `results.png`.
+1. Run benchmarks while exporting results to csv with:
+   * `java -jar target/benchmarks.jar -rff results/results-presentations.csv -rf csv presentations`
+   * `java -jar target/benchmarks.jar -rff results/results-stocks.csv -rf csv stocks`
+2. Use gnuplot to generate plot with `gnuplot benchmark.plot`. This will output `results-presentations.svg` and `results-stocks.svg`.
 
 `Presentations` benchmark was imported from [spring-comparing-template-engines](https://github.com/jreijn/spring-comparing-template-engines).
 
