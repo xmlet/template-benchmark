@@ -24,9 +24,10 @@
 		<trimou.version>2.5.1.Final</trimou.version>
 		<hbs.version>4.4.0</hbs.version>
 		<rocker.version>2.2.1</rocker.version>
+        <jte.version>2.3.0</jte.version>
 
-		<kotlin.version>1.8.20</kotlin.version>
-		<kotlinx.html.version>0.8.0</kotlinx.html.version>
+		<kotlin.version>2.3.10</kotlin.version>
+		<kotlinx.html.version>0.12.0</kotlinx.html.version>
 	</properties>
 
 	<licenses>
@@ -65,7 +66,25 @@
                     </execution>
                 </executions>
             </plugin>
-			<plugin>
+            <plugin>
+                <groupId>gg.jte</groupId>
+                <artifactId>jte-maven-plugin</artifactId>
+                <version>${jte.version}</version>
+                <configuration>
+                    <sourceDirectory>src/main/resources/templates</sourceDirectory>
+                    <targetDirectory>jte-classes</targetDirectory>
+                    <contentType>Plain</contentType>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>precompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>2.4.2</version>
@@ -105,6 +124,18 @@
                 <configuration>
                     <source>17</source>
                     <target>17</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.openjdk.jmh</groupId>
+                            <artifactId>jmh-generator-annprocess</artifactId>
+                            <version>${jmh.version}</version>
+                        </path>
+                        <path>
+                            <groupId>io.jstach</groupId>
+                            <artifactId>jstachio-apt</artifactId>
+                            <version>${jstachio.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
 			<plugin>
@@ -165,13 +196,6 @@
 			<version>${jstachio.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>io.jstach</groupId>
-			<artifactId>jstachio-apt</artifactId>
-			<version>${jstachio.version}</version>
-			<scope>provided</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
 			<version>${freemarker.version}</version>
@@ -201,7 +225,12 @@
             <artifactId>rocker-runtime</artifactId>
             <version>${rocker.version}</version>
         </dependency>
-		<dependency>
+        <dependency>
+            <groupId>gg.jte</groupId>
+            <artifactId>jte-runtime</artifactId>
+            <version>${jte.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.xmlet</groupId>
             <artifactId>htmlflow</artifactId>
             <version>5.0.1</version>
