@@ -94,6 +94,14 @@ public class ExpectedOutputTest {
         assertOutput(hf.stocks());
     }
 
+    @Test
+    public void testJteOutput() throws IOException, TemplateException {
+        var jte = new Jte();
+        jte.setup();
+        assertOutput(jte.stocks());
+    }
+
+
     private void assertOutput(final String output) throws IOException {
         assertEquals(
             readExpectedOutputResource().toLowerCase(),
