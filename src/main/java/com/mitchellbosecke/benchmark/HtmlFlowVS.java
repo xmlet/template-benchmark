@@ -3,6 +3,7 @@ package com.mitchellbosecke.benchmark;
 import com.mitchellbosecke.benchmark.model.Presentation;
 import com.mitchellbosecke.benchmark.model.Stock;
 import com.mitchellbosecke.benchmark.templates.PresentationsHtmlFlow;
+import com.mitchellbosecke.benchmark.templates.PresentationsHtmlFlowVs;
 import com.mitchellbosecke.benchmark.templates.StocksHtmlFlowVS;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Setup;
@@ -28,6 +29,6 @@ public class HtmlFlowVS extends BaseBenchmark {
 
     @Benchmark
     public String presentations() throws IOException {
-        return PresentationsHtmlFlow.view.render(presentations.iterator());
+        return PresentationsHtmlFlowVs.INSTANCE.getView().render(presentations);
     }
 }
