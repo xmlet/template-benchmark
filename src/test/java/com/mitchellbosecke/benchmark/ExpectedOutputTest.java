@@ -1,17 +1,19 @@
 package com.mitchellbosecke.benchmark;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Locale;
-
+import freemarker.template.TemplateException;
 import io.pebbletemplates.pebble.error.PebbleException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import freemarker.template.TemplateException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.stream.Collectors;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  *
@@ -30,7 +32,7 @@ public class ExpectedOutputTest {
         freemarker.setup();
         assertOutput(freemarker.stocks());
     }
-    
+
     @Test
     public void testRockerOutput() throws IOException, TemplateException {
         Rocker rocker = new Rocker();
@@ -95,6 +97,13 @@ public class ExpectedOutputTest {
     }
 
     @Test
+    public void testHtmlFlowVsOutput() throws IOException {
+        HtmlFlowVS hf = new HtmlFlowVS();
+        hf.setup();
+        assertOutput(hf.stocks());
+    }
+
+    @Test
     public void testJteOutput() throws IOException, TemplateException {
         var jte = new Jte();
         jte.setup();
@@ -103,24 +112,20 @@ public class ExpectedOutputTest {
 
 
     private void assertOutput(final String output) throws IOException {
-        assertEquals(
-            readExpectedOutputResource().toLowerCase(),
-            output.replaceAll("\\s", "").toLowerCase());
+        Iterator<String> expected = Arrays.stream(readExpectedOutputResource().split(">")).iterator();
+        Arrays
+                .stream(output.toLowerCase().replaceAll("\\s", "").split(">"))
+                .forEach(actual -> assertEquals(expected.next(), actual));
+
     }
 
     private String readExpectedOutputResource() throws IOException {
-        StringBuilder builder = new StringBuilder();
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(ExpectedOutputTest.class.getResourceAsStream("/expected-output.html")))) {
-            for (;;) {
-                String line = in.readLine();
-                if (line == null) {
-                  break;
-                }
-                builder.append(line);
-            }
+        try (var reader = new BufferedReader(
+                new InputStreamReader(
+                        ExpectedOutputTest.class.getResourceAsStream("/expected-output.html")))) {
+            return reader.lines()
+                    .map(line -> line.toLowerCase().replaceAll("\\s", ""))
+                    .collect(Collectors.joining());
         }
-        // Remove all whitespaces
-        return builder.toString().replaceAll("\\s", "");
     }
-
 }

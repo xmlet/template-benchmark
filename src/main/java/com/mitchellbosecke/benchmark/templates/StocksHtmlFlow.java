@@ -114,7 +114,7 @@ public class StocksHtmlFlow {
         .__() // tr
     );
 
-    private static final String STOCKS_CSS = "/*<![CDATA[*/\n" +
+    static final String STOCKS_CSS = "/*<![CDATA[*/\n" +
         "body {\n" +
         "\tcolor: #333333;\n" +
         "\tline-height: 150%;\n" +

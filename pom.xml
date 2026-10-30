@@ -25,6 +25,7 @@
 		<hbs.version>4.4.0</hbs.version>
 		<rocker.version>2.2.1</rocker.version>
         <jte.version>2.3.0</jte.version>
+        <htmlflow.version>5.2.0</htmlflow.version>
 
 		<kotlin.version>2.3.10</kotlin.version>
 		<kotlinx.html.version>0.12.0</kotlinx.html.version>
@@ -61,7 +62,7 @@
                         </goals>
                         <configuration>
                             <templateDirectory>src/main/resources</templateDirectory>
-                            <javaVersion>1.8</javaVersion>
+                            <javaVersion>17</javaVersion>
                         </configuration>
                     </execution>
                 </executions>
@@ -150,6 +151,7 @@
 							<goal>compile</goal>
 						</goals>
 						<configuration>
+                            <jvmTarget>17</jvmTarget>
 							<sourceDirs>
 								<sourceDir>${project.basedir}/src/main/java</sourceDir>
 							</sourceDirs>
@@ -233,7 +235,12 @@
         <dependency>
             <groupId>com.github.xmlet</groupId>
             <artifactId>htmlflow</artifactId>
-            <version>5.0.1</version>
+            <version>${htmlflow.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.xmlet</groupId>
+            <artifactId>htmlflow-kotlin</artifactId>
+            <version>${htmlflow.version}</version>
         </dependency>
 
 		<dependency>
