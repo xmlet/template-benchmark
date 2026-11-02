@@ -4,12 +4,15 @@ import com.mitchellbosecke.benchmark.model.Stock
 import com.mitchellbosecke.benchmark.templates.StocksHtmlFlow.STOCKS_CSS
 import htmlflow.HtmlFlow
 import htmlflow.HtmlView
+import htmlflow.forEachIndexedOf
 import htmlflow.html
 import org.xmlet.htmlapifaster.EnumHttpEquivType
 import org.xmlet.htmlapifaster.EnumMediaType
 import org.xmlet.htmlapifaster.EnumRelType
 import org.xmlet.htmlapifaster.EnumTypeContentType
 import org.xmlet.htmlapifaster.EnumTypeScriptType
+import org.xmlet.htmlapifaster.Indexed
+import org.xmlet.htmlapifaster.Slot
 import org.xmlet.htmlapifaster.a
 import org.xmlet.htmlapifaster.body
 import org.xmlet.htmlapifaster.h1
@@ -78,7 +81,7 @@ object StocksHtmlFlowVS {
                             }
                         }
                         tbody {
-                            forEachIndexedOf({ it: List<Stock> -> it }) { tbody, row ->
+                            forEachIndexedOf { row: Slot<Indexed<Stock>> ->
                                 tr {
                                     attrOf("class", row.read { if (it.index() % 2 == 0) "odd" else "even" })
                                     td {

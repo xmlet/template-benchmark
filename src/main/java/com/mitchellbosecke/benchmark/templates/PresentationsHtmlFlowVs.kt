@@ -3,10 +3,12 @@ package com.mitchellbosecke.benchmark.templates
 import com.mitchellbosecke.benchmark.model.Presentation
 import htmlflow.HtmlFlow
 import htmlflow.HtmlView
+import htmlflow.forEachOf
 import htmlflow.html
 import org.xmlet.htmlapifaster.EnumHttpEquivType
 import org.xmlet.htmlapifaster.EnumMediaType
 import org.xmlet.htmlapifaster.EnumRelType
+import org.xmlet.htmlapifaster.Slot
 import org.xmlet.htmlapifaster.body
 import org.xmlet.htmlapifaster.div
 import org.xmlet.htmlapifaster.h1
@@ -52,8 +54,8 @@ object PresentationsHtmlFlowVs {
                                 text("JFall 2013 Presentations - htmlApi")
                             }
                         }
-                        forEachOf({ it: Iterable<Presentation> -> it }) { div, presentation ->
-                            div.div {
+                        forEachOf { presentation: Slot<Presentation> ->
+                            div {
                                 attrClass("panel panel-default")
                                 div {
                                     attrClass("panel-heading")
