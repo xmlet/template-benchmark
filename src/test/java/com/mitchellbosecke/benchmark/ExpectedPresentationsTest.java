@@ -1,5 +1,6 @@
 package com.mitchellbosecke.benchmark;
 
+import com.mitchellbosecke.benchmark.templates.PresentationsKotlin;
 import freemarker.template.TemplateException;
 import io.pebbletemplates.pebble.error.PebbleException;
 import org.junit.Test;
@@ -82,17 +83,27 @@ public class ExpectedPresentationsTest {
 
     @Test
     public void testJ2HtmlOutput() throws IOException {
-        //assertOutput(new J2Html().presentations());
+        assertOutput(new J2Html().presentations());
     }
 
     @Test
     public void testKotlinOutput() throws IOException {
-        //assertOutput(new Kotlin().presentations());
+        assertOutput(new KotlinHtml().presentations());
     }
 
     @Test
     public void testHtmlFlowOutput() throws IOException {
         HtmlFlow hf = new HtmlFlow();
+
+        hf.setup();
+
+        assertOutput(hf.presentations());
+        assertOutput(hf.presentations());
+    }
+
+    @Test
+    public void testHtmlFlowVsOutput() throws IOException {
+        HtmlFlowVS hf = new HtmlFlowVS();
 
         hf.setup();
 
