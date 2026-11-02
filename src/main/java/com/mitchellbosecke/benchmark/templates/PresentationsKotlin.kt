@@ -10,7 +10,7 @@ class PresentationsKotlin {
     companion object {
 
         fun presentationsTemplate(presentations : Collection<Presentation> ): String {
-            return createHTML(prettyPrint = false)
+            return "<!DOCTYPE html>\n" + createHTML(prettyPrint = false)
                     .html {
                         head {
                             meta {charset = "utf-8" }
@@ -39,7 +39,7 @@ class PresentationsKotlin {
                                         }
                                         div {
                                             classes = setOf("panel-body")
-                                            text (it.summary)
+                                            unsafe { +it.summary }
                                         }
                                     }
                                 }

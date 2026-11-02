@@ -3,6 +3,7 @@ package com.mitchellbosecke.benchmark;
 import com.mitchellbosecke.benchmark.model.Presentation;
 import com.mitchellbosecke.benchmark.model.Stock;
 import j2html.attributes.Attribute;
+import j2html.tags.UnescapedText;
 import org.openjdk.jmh.annotations.Benchmark;
 
 import java.io.BufferedReader;
@@ -97,7 +98,7 @@ public class J2Html extends BaseBenchmark {
                                                 div(
                                                         h3(presentation.getTitle() + " - " + presentation.getSpeakerName()).withClass("panel-title")
                                                 ).withClass("panel-heading"),
-                                                div(presentation.getSummary()).withClass("panel-body")
+                                                div().with(new UnescapedText(presentation.getSummary())).withClass("panel-body")
                                         ).withClass("panel panel-default")
                                 )
                         ).withClass("container"),
