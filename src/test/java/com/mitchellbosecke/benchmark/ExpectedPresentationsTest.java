@@ -111,6 +111,14 @@ public class ExpectedPresentationsTest {
         assertOutput(hf.presentations());
     }
 
+    @Test
+    public void testJteOutput() throws IOException {
+        var jte = new Jte();
+        jte.setup();
+        assertOutput(jte.presentations());
+    }
+
+
     private void assertOutput(final String output) throws IOException {
         Pattern less = Pattern.compile("<");
         Iterator<String> actual = less
